@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felrapportering</title>
+</head>
+<body>
+    <h1>Felrapportering</h1>
+    <form id="felrapportForm">
+        <label for="anstallningsnummer">Anställningsnummer:</label><br>
+        <input type="text" id="anstallningsnummer" name="anstallningsnummer" required><br><br>
+
+        <label for="handelsebeskrivning">Händelsebeskrivning:</label><br>
+        <textarea id="handelsebeskrivning" name="handelsebeskrivning" required></textarea><br><br>
+
+        <label for="bussnummer">Bussnummer:</label><br>
+        <input type="text" id="bussnummer" name="bussnummer" maxlength="4" required><br><br>
+
+        <label for="plats">Lägg till plats (valfritt):</label>
+        <input type="checkbox" id="plats" name="plats"><br><br>
+
+        <label for="bild">Ladda upp bild (valfritt):</label><br>
+        <input type="file" id="bild" name="bild"><br><br>
+
+        <button type="submit">Skicka</button>
+    </form>
+</body>
+</html>
