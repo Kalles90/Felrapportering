@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felrapportering</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("ditt_user_id"); // Ersätt med ditt User ID från EmailJS
+    </script>
 </head>
 <body>
     <h1>Felrapportering</h1>
@@ -25,5 +29,47 @@
 
         <button type="submit">Skicka</button>
     </form>
+
+    <script>
+        function genereraBeskrivningForslag(beskrivning) {
+            const ord = beskrivning.split(' ').slice(0, 10).join(' ');
+            return ord + (beskrivning.split(' ').length > 10 ? '...' : '');
+        }
+
+        document.getElementById('felrapportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let platsData = '';
+            if (document.getElementById('plats').checked) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    platsData = `Lat: ${position.coords.latitude}, Long: ${position.coords.longitude}`;
+                    skickaFormular(platsData);
+                }, function(error) {
+                    console.error('Kunde inte hämta plats:', error);
+                    skickaFormular('Ingen plats');
+                });
+            } else {
+                skickaFormular('Ingen plats');
+            }
+        });
+
+        function skickaFormular(platsData) {
+            const formData = {
+                anstallningsnummer: document.getElementById('anstallningsnummer').value,
+                handelsebeskrivning: document.getElementById('handelsebeskrivning').value,
+                beskrivning_forslag: genereraBeskrivningForslag(document.getElementById('handelsebeskrivning').value),
+                bussnummer: document.getElementById('bussnummer').value,
+                plats: platsData,
+                bild: document.getElementById('bild').files[0] ? 'Bild bifogad' : 'Ingen bild'
+            };
+
+            emailjs.send('din_tjanst_id', 'din_mall_id', formData) // Ersätt med Service ID och Template ID
+                .then(function(response) {
+                    alert('Felrapport skickad!');
+                }, function(error) {
+                    alert('Något gick fel. Försök igen.');
+                });
+        }
+    </script>
 </body>
 </html>
