@@ -6,7 +6,7 @@
     <title>Felrapportering</title>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        emailjs.init("ditt_user_id"); // Ersätt med ditt User ID från EmailJS
+        emailjs.init("91BCwzt8bvW_-G6_j"); // Ersätt med ditt User ID från EmailJS
     </script>
 </head>
 <body>
@@ -63,7 +63,7 @@
                 bild: document.getElementById('bild').files[0] ? 'Bild bifogad' : 'Ingen bild'
             };
 
-            emailjs.send('din_tjanst_id', 'din_mall_id', formData) // Ersätt med Service ID och Template ID
+            emailjs.send('service_ru6vqvl', 'template_34vdcm9', formData) // Ersätt med Service ID och Template ID
                 .then(function(response) {
                     alert('Felrapport skickad!');
                 }, function(error) {
